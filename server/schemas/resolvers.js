@@ -1,10 +1,21 @@
-const { User, Plant } = require("../models");
+const { User, Plant, PlantHistory } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 const { async } = require("rxjs");
 
 const resolvers = {
   Query: {
+    plants: async (parent, args, context) => {
+      const plantData = await Plant.find()
+        .populate("history")
+        .select("-__v");
+      return plantData;
+    },
+    plantById: async (parent, { _id }, context) => {
+      const plantData = await Plant.findById(_id)
+        .select("-__v")
+      return plantData;
+    },
     user: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findById(context.user._id)
@@ -13,31 +24,51 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
-    plants: async (parent, args, context) => {
-      const plantData = await Plant.find()
-        .select("-__v");
-      let test = plantData.filter((plantData) => plantData._id)
-      let allData = []
-      test.forEach(element => {
-        let data = Plant.findById(Buffer.from(element._id.id).toString('hex')).then(data => data)
-        allData.push(data)
-      })
-      for (var i = 0; i < allData.length; i++) {
-        allData[i] = await allData[i]
-      }
-      let data = allData.filter(data => data.name == "Pikachu")
-      console.log(data)
-      return data;
-    },
-    plantById: async (parent, args, context) => {
-      const plantData = await Plant.findById(args._id)
-        .select("-__v")
-      console.log(plantData);
-      return plantData;
-    }
   },
 
   Mutation: {
+    updateHistory: async (parent, { _id, temperature, pH, humidity }, context) => {
+      const getHistory = await Plant.findById(_id)
+      console.log(getHistory.history[0])
+      const plantData = await PlantHistory.findByIdAndUpdate(
+        getHistory.history[0],
+        {
+          $push: {
+            createdAt: Date.now(),
+            temperature: temperature,
+            pH: pH,
+            humidity: humidity,
+          },
+        },
+        { new: true }
+      )
+        .select("-__v")
+      return plantData;
+    },
+    setHistory: async (parent, { _id, temperature, pH, humidity }, context) => {
+      let createdAt = Date.now();
+      createdAt = createdAt.toString()
+      let plantHistory = await PlantHistory.create({
+        createdAt: [createdAt],
+        temperature: temperature,
+        pH: pH,
+        humidity: humidity
+      })
+      let updatePlant = await Plant.findByIdAndUpdate(_id, { history: plantHistory }).populate({ path: "history" })
+      console.log(updatePlant);
+      console.log(plantHistory)
+      return updatePlant.history;
+    },
+
+    createPlant: async (parent, { name, temperature, pH, humidity }) => {
+      const plant = await Plant.create({
+        name: name,
+        temperature: temperature,
+        pH: pH,
+        humidity: humidity
+      });
+      return plant;
+    },
     createUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -59,24 +90,6 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    createPlant: async (parent, { name, minTemp, maxTemp, minPH, maxPH, minHumidity, maxHumidity }) => {
-      const plant = await Plant.create({
-        name: name,
-        temperature: {
-          minTemp: minTemp,
-          maxTemp: maxTemp,
-        },
-        pH: {
-          minPH: minPH,
-          maxPH: maxPH,
-        },
-        humidity: {
-          minHumidity: minHumidity,
-          maxHumidity: maxHumidity
-        }
-      });
-      return plant;
-    }
   }
 
 };

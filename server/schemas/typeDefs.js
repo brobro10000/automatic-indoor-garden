@@ -16,17 +16,30 @@ const typeDefs = gql`
     temperature: Int
     pH: Float
     humidity: Int
+    history: [PlantHistory]
+  }
+  type PlantHistory {
+    _id: ID
+    createdAt: [String]
+    temperature: [Int]
+    pH: [Float]
+    humidity: [Int]
   }
 
+
+
   type Query {
-    user: User
-    plants: Plant
+    plants: [Plant]
     plantById(_id: ID!): Plant
+    historyById(_id: ID!): PlantHistory
+    user: User
   }
 
   type Mutation {
+    updateHistory(_id: ID!, temperature: Int, pH: Float, humidity: Int): PlantHistory
+    setHistory(_id: ID!, temperature:[Int], pH:[Float], humidity:[Int]): [PlantHistory]
+    createPlant(name: String!, temperature: Int, pH: Float, humidity: Int): Plant
     createUser(username: String!, email: String!, password: String!): Auth
-    createPlant(name: String!, minTemp:Int, maxTemp:Int, minPH:Float, maxPH:Float, minHumidity:Int, maxHumidity:Int): Plant
     login(email: String!, password: String!): Auth
   }
 `;
