@@ -13,6 +13,7 @@ const resolvers = {
     },
     plantById: async (parent, { _id }, context) => {
       const plantData = await Plant.findById(_id)
+        .populate("history")
         .select("-__v")
       return plantData;
     },
@@ -55,8 +56,6 @@ const resolvers = {
         humidity: humidity
       })
       let updatePlant = await Plant.findByIdAndUpdate(_id, { history: plantHistory }).populate({ path: "history" })
-      console.log(updatePlant);
-      console.log(plantHistory)
       return updatePlant.history;
     },
 
