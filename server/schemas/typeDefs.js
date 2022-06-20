@@ -6,7 +6,6 @@ const typeDefs = gql`
   }
   type User {
     _id: ID
-    username: String
     email: String
     password: String
   }
@@ -39,7 +38,7 @@ const typeDefs = gql`
     updateHistory(_id: ID!, temperature: Int, pH: Float, humidity: Int): PlantHistory
     setHistory(_id: ID!, temperature:[Int], pH:[Float], humidity:[Int]): [PlantHistory]
     createPlant(name: String!, temperature: Int, pH: Float, humidity: Int): Plant
-    createUser(username: String!, email: String!, password: String!): Auth
+    createUser(email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
   }
 `;

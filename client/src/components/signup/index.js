@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import { Form, Header, Input, Button } from 'semantic-ui-react'
 import { validateEmail, validatePassword } from '../../utils/helpers'
+import { CREATE_USER } from "../../utils/mutations";
+import { useMutation } from "@apollo/client";
+import Auth from "../../utils/auth";
 
-const SignupForm = () => {
+const SignupForm = (animatedClass) => {
     const [submission, setSubmission] = useState({
         email: null, password: null
     })
+    const [addUser] = useMutation(CREATE_USER);
+
     const updateSubmission = (e) => {
         e.preventDefault()
         if (e.target.name === 'email') {
@@ -16,13 +21,21 @@ const SignupForm = () => {
         }
         return setSubmission({ ...submission, [e.target.name]: e.target.value })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        const mutationResponse = await addUser({
+            variables: {
+                email: submission.email,
+                password: submission.password
+            }
+        });
+        const { token } = mutationResponse.data.createUser.token;
+        Auth.login(token)
 
     }
     return (
 
-        <Form onSubmit={handleSubmit}>
+        <Form name='signupContent' onSubmit={handleSubmit} className={animatedClass.props}>
             <Header>Sign Up</Header>
             <Form.Field
                 required

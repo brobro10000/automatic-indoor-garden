@@ -35,16 +35,24 @@ code {
 /* LOGIN MODAL CSS */
 div[data-modal="login-button-group"] {
   display: flex;
+  padding: 1rem;
 }
 
 div[data-modal="login-left-button"] {
   flex: 0 0 20%;
+  max-width: 20%;
   text-align: -webkit-left;
 }
 
 div[data-modal="login-right-button"] {
   flex: 0 0 80%;
+  max-width: 80%;
   text-align: -webkit-right;
+}
+
+.overflowAnimate {
+  overflow: hidden;
+
 }
 
 /* LOGIN MODAL END */

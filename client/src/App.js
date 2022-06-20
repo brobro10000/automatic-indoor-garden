@@ -10,7 +10,9 @@ import { setContext } from "@apollo/client/link/context";
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import 'semantic-ui-css/semantic.min.css';
+import 'animate.css';
 
 // import Loading from "./components/Loading";
 const httpLink = createHttpLink({
@@ -40,8 +42,9 @@ function App() {
           <Router>
             <Provider store={store}>
               <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/" element={<Home />} />
-                <Route index element={<Home />} />
+                {/* <Route index element={<Home />} /> */}
               </Routes>
             </Provider>
           </Router>

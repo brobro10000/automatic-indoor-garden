@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { Header, Form, Input, Button } from 'semantic-ui-react'
 import { validateEmail, validatePassword } from '../../utils/helpers'
+import { LOGIN } from "../../utils/mutations";
+import { useMutation } from "@apollo/client";
+import Auth from "../../utils/auth";
 
+const LoginForm = (animatedClass) => {
 
-const LoginForm = () => {
     const [submission, setSubmission] = useState({
         email: null, password: null
     })
+    const [login] = useMutation(LOGIN);
     const updateSubmission = (e) => {
         e.preventDefault()
         if (e.target.name === 'email') {
@@ -17,13 +21,27 @@ const LoginForm = () => {
         }
         return setSubmission({ ...submission, [e.target.name]: e.target.value })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        const mutationResponse = await login({
+            variables: {
+                email: submission.email,
+                password: submission.password
+            }
+        });
 
+        const token = mutationResponse.data.login.token;
+        if (token) {
+            let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
+            document.getElementById('login-modal-container').setAttribute('class', classList)
+            setTimeout(() => {
+                Auth.login(token)
+            }, 1500)
+        }
     }
     return (
-        <Form onSubmit={handleSubmit}>
-            <Header>Login</Header>
+        <Form name='loginContent' onSubmit={handleSubmit} className={animatedClass.props}>
+            <Header> Login</Header>
             <Form.Field
                 required
                 id='form-input-control-email'
@@ -54,7 +72,7 @@ const LoginForm = () => {
                 name='Submit'
                 content='Submit'
             />
-        </Form>
+        </Form >
     )
 }
 
