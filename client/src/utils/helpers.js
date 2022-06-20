@@ -8,6 +8,11 @@ export function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
+export function validatePassword(password) {
+  var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return re.test(String(password));
+}
+
 export function idbPromise(storeName, method, object) {
   return new Promise((resolve, reject) => {
     const request = window.indexedDB.open("fruicrose", 1);

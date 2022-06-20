@@ -1,6 +1,7 @@
+/* GLOBAL CSS */
 * {
+  padding: 0;
   margin: 0 auto;
-
 }
 
 body {
@@ -10,7 +11,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 code {
@@ -27,3 +27,24 @@ code {
   background: linear-gradient(0deg, rgba(34, 173, 195, 1) 0%, rgba(214, 253, 45, 1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#22adc3", endColorstr="#d6fd2d", GradientType=1);
 }
+
+/* END GLOBAL CSS */
+
+
+
+/* LOGIN MODAL CSS */
+div[data-modal="login-button-group"] {
+  display: flex;
+}
+
+div[data-modal="login-left-button"] {
+  flex: 0 0 20%;
+  text-align: -webkit-left;
+}
+
+div[data-modal="login-right-button"] {
+  flex: 0 0 80%;
+  text-align: -webkit-right;
+}
+
+/* LOGIN MODAL END */

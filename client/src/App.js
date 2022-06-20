@@ -10,6 +10,8 @@ import { setContext } from "@apollo/client/link/context";
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import Home from "./pages/Home";
+import 'semantic-ui-css/semantic.min.css';
+
 // import Loading from "./components/Loading";
 const httpLink = createHttpLink({
   uri: "graphql",

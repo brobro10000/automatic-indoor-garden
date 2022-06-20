@@ -1,7 +1,6 @@
 const { User, Plant, PlantHistory } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { async } = require("rxjs");
 
 const resolvers = {
   Query: {

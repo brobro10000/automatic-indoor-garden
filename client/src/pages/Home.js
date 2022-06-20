@@ -1,11 +1,11 @@
-import StarterModal from "./Modal";
+// import StarterModal from "./Modal";
+import LoginModal from "../components/loginModal/index.js";
 
 const Home = () => {
 
     return (
         <div className="background">
-            <h1>Hello</h1>
-            <StarterModal />
+            <LoginModal />
         </div>
     );
 };
