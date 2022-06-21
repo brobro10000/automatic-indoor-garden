@@ -34,9 +34,9 @@ const LoginForm = (animatedClass) => {
         if (token) {
             let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
             document.getElementById('login-modal-container').setAttribute('class', classList)
-            setTimeout(() => {
-                Auth.login(token)
-            }, 1500)
+            // setTimeout(() => {
+            //     Auth.login(token)
+            // }, 1500)
         }
     }
     return (
