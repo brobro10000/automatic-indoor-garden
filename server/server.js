@@ -28,10 +28,10 @@ async function start() {
 start();
 
 if (process.env.NODE_ENV === "production") {
-    app.use(expressStaticGzip(path.join(__dirname, "../client/build/dist")));
+    app.use(expressStaticGzip(path.join(__dirname, "../client/build/")));
 }
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/dist/index.html"));
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 db.once("open", () => {
