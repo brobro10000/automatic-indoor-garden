@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import store from "./utils/store";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import 'semantic-ui-css/semantic.min.css';
+// import 'semantic-ui-css/semantic.min.css';
 import 'animate.css';
 
 // import Loading from "./components/Loading";
