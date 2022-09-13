@@ -34,7 +34,6 @@ const SignupForm = (animatedClass) => {
 
     }
     return (
-
         <Form name='signupContent' onSubmit={handleSubmit} className={animatedClass.props}>
             <Header>Sign Up</Header>
             <Form.Field
@@ -47,7 +46,9 @@ const SignupForm = (animatedClass) => {
                 onChange={updateSubmission}
                 placeholder='test@domain.com'
                 error={
-                    (submission?.email?.split('').length > 0) && !validateEmail(submission.email) && { content: "Please enter a valid email address." }
+                    (submission?.email?.split('').length > 0) &&
+                    !validateEmail(submission.email) &&
+                    { content: "Please enter a valid email address." }
                 }
             />
             <Form.Field
@@ -59,7 +60,9 @@ const SignupForm = (animatedClass) => {
                 label='Password'
                 onChange={updateSubmission}
                 error={
-                    (submission?.password?.split('').length > 0) && !validatePassword(submission.password) && { content: "Password must contain uppercase, lowercase, number and  special character (@$!%*?&)" }
+                    (submission?.password?.split('').length > 0) &&
+                    !validatePassword(submission.password) &&
+                    { content: "Password must contain uppercase, lowercase, number and  special character (@$!%*?&)" }
                 }
             />
             <Form.Field
