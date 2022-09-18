@@ -7,15 +7,15 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
     const [loggedIn,] = useState(Auth.loggedIn())
     const navigate = useNavigate()
-    useEffect(() =>{
-        if(loggedIn){
+    useEffect(() => {
+        if (loggedIn) {
             navigate('/dashboard')
         }
     });
     return (
-            <div className="background">
-                <LoginModal />
-            </div>
+        <div className="background">
+            <LoginModal />
+        </div>
     );
 };
 

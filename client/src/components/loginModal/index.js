@@ -1,38 +1,58 @@
-import React, { useState } from 'react'
-import { Button, Modal, Container } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react'
+import { Button, Modal, Container, Divider } from 'semantic-ui-react'
 import Login from '../login/index'
 import SignUp from '../signup/index'
-
-export default function ButtonExampleButton() {
+import About from '../about/index'
+export default function LoginModal() {
     const [open, setOpen] = useState(true)
-    const [showForm, setForm] = useState(<></>)
-    var [number, setNumber] = useState(0)
+    const [showForm, setForm] = useState(<About props={'animate__animated animate__bounceIn'}></About>)
+    useEffect(() => {
+        document.getElementsByName('about')[0].setAttribute('disabled', true)
+    }, [])
+
+    function enableElement(elementName) {
+        return document.getElementsByName(elementName)[0].removeAttribute('disabled')
+    }
 
     function displayAndAnimate(e) {
         if (e.target.name === 'login') {
-            if (number !== 0) {
-                e.target.setAttribute('disabled', true)
-                document.getElementsByName('signup')[0].removeAttribute('disabled')
+            e.target.setAttribute('disabled', true)
+            enableElement('signup')
+            enableElement('about')
+            if (showForm.type.name === 'SignupForm') {
                 setForm(<SignUp props={'animate__animated animate__bounceOutLeft'} />)
-            } else {
-                e.target.setAttribute('disabled', true)
-                setNumber(1)
+            } else if (showForm.type.name === 'About') {
+                setForm(<About props={'animate__animated animate__bounceOutLeft'} />)
             }
             setTimeout(() => {
                 setForm(<Login props={'animate__animated animate__bounceInRight'} />)
             }, 500)
-        } else if (e.target.name === 'signup') {
-            if (number !== 0) {
-                e.target.setAttribute('disabled', true)
-                document.getElementsByName('login')[0].removeAttribute('disabled')
+        }
+        if (e.target.name === 'signup') {
+            e.target.setAttribute('disabled', true)
+            enableElement('login')
+            enableElement('about')
+            if (showForm.type.name === 'LoginForm') {
                 setForm(<Login props={'animate__animated animate__bounceOutLeft'} />)
-            } else {
-                e.target.setAttribute('disabled', true)
-                setNumber(1)
+            } else if (showForm.type.name === 'About') {
+                setForm(<About props={'animate__animated animate__bounceOutLeft'} />)
             }
             setTimeout(() => {
                 setForm(<SignUp props={'animate__animated animate__bounceInRight'} />)
             }, 500)
+        }
+        if (e.target.name === 'about') {
+            e.target.setAttribute('disabled', true)
+            enableElement('login')
+            enableElement('signup')
+            if (showForm.type.name === 'LoginForm') {
+                setForm(<Login props={'animate__animated animate__bounceOutLeft'} />)
+            } else if (showForm.type.name === 'SignupForm') {
+                setForm(<SignUp props={'animate__animated animate__bounceOutLeft'} />)
+            }
+            setTimeout(() => {
+                setForm(<About props={'animate__animated animate__bounceInRight'} />)
+            }, 750)
         }
     }
 
@@ -53,12 +73,14 @@ export default function ButtonExampleButton() {
                         {showForm}
                     </Modal.Description>
                 </Modal.Content>
-                <hr></hr>
+                <Divider horizontal>Navigation</Divider>
                 <div data-modal="login-button-group">
                     <div data-modal='login-left-button'>
                         <Button
+                            name='about'
                             color='black'
-                            onClick={() => setForm(<></>)}>
+                            onClick={displayAndAnimate}
+                        >
                             About
                         </Button>
                     </div>
