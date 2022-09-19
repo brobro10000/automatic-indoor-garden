@@ -6,7 +6,7 @@ export default function About(animatedClass) {
         <Grid columns={2} stackable className={animatedClass.props}>
             <Grid.Row>
                 <Grid.Column width={4} textAlign='center'>
-                    <Image src={greenhouse} size='small' spaced />
+                    <Image alt="Homepage Logo" src={greenhouse} size='small' spaced />
                 </Grid.Column>
                 <Grid.Column data-about="modal-header-text" width={12}>
                     <Header className='center-text' size='large'>Automatic Indoor Garden</Header>
