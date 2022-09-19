@@ -1,6 +1,5 @@
 import React from 'react'
 import { Image, Grid, Header } from 'semantic-ui-react'
-import Logo from '../../assets/logo/AIGlogo.png'
 import greenhouse from '../../assets/logo/greenhouse.svg'
 export default function About(animatedClass) {
     return (
