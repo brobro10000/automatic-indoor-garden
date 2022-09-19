@@ -23,6 +23,7 @@ const SignupForm = (animatedClass) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log(submission.email)
         const mutationResponse = await addUser({
             variables: {
                 email: submission.email,
