@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Modal, Container, Divider } from 'semantic-ui-react'
+import { Button, Modal, Container, Divider, Segment } from 'semantic-ui-react'
 import Login from '../login/index'
 import SignUp from '../signup/index'
 import About from '../about/index'
@@ -65,12 +65,14 @@ export default function LoginModal() {
                 onOpen={() => setOpen(true)}
                 open={open}
             >
-                <Modal.Header>
+                <Modal.Header className='center-text'>
                     Welcome to your Garden
                 </Modal.Header>
                 <Modal.Content className='overflowAnimate'>
                     <Modal.Description>
-                        {showForm}
+                        <Segment>
+                            {showForm}
+                        </Segment>
                     </Modal.Description>
                 </Modal.Content>
                 <Divider horizontal>Navigation</Divider>

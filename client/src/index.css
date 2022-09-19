@@ -50,9 +50,24 @@ div[data-modal="login-right-button"] {
   text-align: right;
 }
 
+div[data-about="modal-header-text"] {
+  align-self: center;
+}
+
+/* div[data-about="modal-header-text"]>h1 {
+  font-size: 3rem !important;
+} */
+
 .overflowAnimate {
   overflow: hidden;
-
 }
 
 /* LOGIN MODAL END */
+
+/* UTILITY CSS */
+.center-text {
+  text-align: -webkit-center;
+  text-align: center;
+}
+
+/* END UTILITY CSS */
