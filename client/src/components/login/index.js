@@ -12,7 +12,7 @@ const LoginForm = (animatedClass) => {
     })
     const [login] = useMutation(LOGIN);
     const updateSubmission = (e) => {
-        console.log(e.target.value)
+
         e.preventDefault()
         if (e.target.name === 'email') {
             validateEmail(e.target.value)
@@ -20,12 +20,12 @@ const LoginForm = (animatedClass) => {
         if (e.target.name === 'password') {
             validatePassword(e.target.value)
         }
-        console.log(e.target.value, e.target.name, submission)
+
         return setSubmission({ ...submission, [e.target.name]: e.target.value })
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(submission.email)
+
         const mutationResponse = await login({
             variables: {
                 email: submission.email,

@@ -8,6 +8,12 @@ const typeDefs = gql`
     _id: ID
     email: String
     password: String
+    devices: [Device]
+  }
+  type Device {
+    _id: ID
+    uuid: String
+    plants: [Plant]
   }
   type Plant {
     _id: ID
@@ -28,6 +34,7 @@ const typeDefs = gql`
 
 
   type Query {
+    devices: [Device]
     plants: [Plant]
     plantById(_id: ID!): Plant
     historyById(_id: ID!): PlantHistory
@@ -35,6 +42,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    addDevice(uuid: String!): Device
     updateHistory(_id: ID!, temperature: Int, pH: Float, humidity: Int): PlantHistory
     setHistory(_id: ID!, temperature:[Int], pH:[Float], humidity:[Int]): [PlantHistory]
     createPlant(name: String!, temperature: Int, pH: Float, humidity: Int): Plant

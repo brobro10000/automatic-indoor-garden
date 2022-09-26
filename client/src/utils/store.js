@@ -2,11 +2,7 @@ import { createStore } from "redux";
 import { reducer } from './reducers'
 
 const initialState = {
-  products: [],
-  categories: [],
-  cart: [],
-  currentForm: false,
-  formType: 0
+  open: false
 }
 
 export default createStore(
