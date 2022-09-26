@@ -13,6 +13,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  devices: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Device",
+    },
+  ]
 });
 
 // set up pre-save middleware to create password

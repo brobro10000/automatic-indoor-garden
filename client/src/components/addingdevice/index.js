@@ -1,27 +1,12 @@
-import { Icon, Header, Modal, Button } from 'semantic-ui-react'
-import { useReducer } from 'react'
+import { Icon, Header, Modal } from 'semantic-ui-react'
 import AddDeviceForm from '../addDeviceForm'
-function exampleReducer(state, action) {
-    switch (action.type) {
-        case 'close':
-            return { open: false }
-        case 'open':
-            return { open: true, size: action.size }
-        default:
-            throw new Error('Unsupported action...')
-    }
-}
-
+import { useSelector, useDispatch } from 'react-redux'
 export default function AddDevice() {
-    const [state, dispatch] = useReducer(exampleReducer, {
-        open: false,
-        size: undefined,
-    })
-    const { open, size } = state
+    const open = useSelector((state) => state.open)
+    const dispatch = useDispatch();
     return (
         <>
             <Modal
-                size={size}
                 open={open}
                 onClose={() => dispatch({ type: 'close' })}
             >
@@ -29,16 +14,8 @@ export default function AddDevice() {
                 <Modal.Content>
                     <AddDeviceForm />
                 </Modal.Content>
-                <Modal.Actions>
-                    <Button negative onClick={() => dispatch({ type: 'close' })}>
-                        No
-                    </Button>
-                    <Button positive onClick={() => dispatch({ type: 'close' })}>
-                        Yes
-                    </Button>
-                </Modal.Actions>
             </Modal>
-            <div className='center-text add-device' onClick={() => dispatch({ type: 'open', size: 'small' })}>
+            <div className='center-text add-device' onClick={() => dispatch({ type: 'open' })}>
                 <Icon name='add' size='huge' />
                 <Header>Click to add a device</Header>
             </div>

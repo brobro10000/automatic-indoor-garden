@@ -1,4 +1,4 @@
-const { User, Plant, PlantHistory } = require("../models");
+const { User, Plant, PlantHistory, Device } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
@@ -19,6 +19,7 @@ const resolvers = {
     user: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findById(context.user._id)
+          .populate("devices")
           .select("-__v -password")
         return userData;
       }
@@ -27,6 +28,20 @@ const resolvers = {
   },
 
   Mutation: {
+    addDevice: async (parent, args, context) => {
+
+      if (context.user) {
+        const deviceData = await Device.create(args);
+        console.log(deviceData)
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { devices: deviceData } },
+          { new: true }
+        );
+        return deviceData;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
     updateHistory: async (parent, { _id, temperature, pH, humidity }, context) => {
       const getHistory = await Plant.findById(_id)
       console.log(getHistory.history[0])

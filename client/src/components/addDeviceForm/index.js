@@ -1,15 +1,49 @@
-import { Form, Input } from 'semantic-ui-react'
-
+import { Form, Input, Button } from 'semantic-ui-react'
+import { ADD_DEVICE } from '../../utils/mutations'
+import { useMutation } from "@apollo/client";
+import Auth from "../../utils/auth";
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 export default function AddDeviceForm() {
+    const [submission, setSubmission] = useState({
+        uuid: null
+    })
+    const [addDevice] = useMutation(ADD_DEVICE);
+    const dispatch = useDispatch();
+    const updateSubmission = (e) => {
+        e.preventDefault()
+        return setSubmission({ ...submission, [e.target.name]: e.target.value })
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (Auth.loggedIn()) {
+            const mutationResponse = await addDevice({
+                variables: {
+                    uuid: submission.uuid
+                }
+            })
+            if (mutationResponse) {
+                dispatch({ type: 'close' })
+            }
+        }
+    }
+
     return (
-        <Form name='loginContent'>
+        <Form name='deviceIDContent' onSubmit={handleSubmit}>
             <Form.Field
                 required
-                id='form-input-control-email'
-                name='email'
+                id='form-input-control-device-id'
+                name='uuid'
                 control={Input}
-                type='email'
+                type=''
+                onChange={updateSubmission}
                 label='Device ID'
+            />
+            <Form.Field
+                id='form-button-control'
+                control={Button}
+                name='Submit'
+                content='Submit'
             />
         </Form >
 

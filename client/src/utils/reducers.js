@@ -17,11 +17,21 @@ export const reducer = (state, action) => {
         ...state,
         user: action.user,
       };
+    case 'close':
+      return {
+        ...state,
+        open: false
+      }
+    case 'open':
+      return {
+        ...state,
+        open: true
+      }
     default:
       return state;
   }
 };
 
-export function useFruitReducer(initialState) {
+export function usePlantReducer(initialState) {
   return useReducer(reducer, initialState);
 }
