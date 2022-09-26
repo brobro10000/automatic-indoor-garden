@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import LoginModal from "../components/loginModal/index.js";
 import Auth from "../utils/auth";
 import { useNavigate } from "react-router-dom";
-
+import { Container } from "semantic-ui-react"
 const Home = () => {
     const [loggedIn,] = useState(Auth.loggedIn())
     const navigate = useNavigate()
@@ -13,9 +13,9 @@ const Home = () => {
         }
     });
     return (
-        <div className="background">
+        <Container className="background">
             <LoginModal />
-        </div>
+        </Container>
     );
 };
 

@@ -2,6 +2,9 @@
 import Auth from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Container, Divider } from "semantic-ui-react"
+import PageHeader from "../components/pageheader";
+import AddDevice from "../components/addingdevice";
 const Dashboard = () => {
     const [loggedIn,] = useState(Auth.loggedIn())
     const navigate = useNavigate()
@@ -11,10 +14,14 @@ const Dashboard = () => {
         }
     });
     return (
-        <div className="background">
-            <h1>Dashboard</h1>
-            <h2>Welcome!</h2>
-        </div>
+        <>
+            <PageHeader data-pageheader='container'></PageHeader>
+            <Container>
+                <AddDevice />
+                <Divider section></Divider>
+            </Container>
+
+        </>
     );
 };
 
