@@ -1,6 +1,7 @@
-import { Icon, Header, Modal } from 'semantic-ui-react'
+import { Icon, Header, Modal, Container } from 'semantic-ui-react'
 import AddDeviceForm from '../addDeviceForm'
 import { useSelector, useDispatch } from 'react-redux'
+import DeviceCard from '../devicecard'
 export default function AddDevice() {
     const open = useSelector((state) => state.open)
     const dispatch = useDispatch();
@@ -15,6 +16,9 @@ export default function AddDevice() {
                     <AddDeviceForm />
                 </Modal.Content>
             </Modal>
+            <Container>
+                <DeviceCard />
+            </Container>
             <div className='center-text add-device' onClick={() => dispatch({ type: 'open' })}>
                 <Icon name='add' size='huge' />
                 <Header>Click to add a device</Header>
