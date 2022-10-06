@@ -14,6 +14,7 @@ export const QUERY_DEVICES = gql`
   user {
     devices {
       uuid
+      name
     }
   }
 }

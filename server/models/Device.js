@@ -6,6 +6,10 @@ const deviceSchema = new Schema({
         required: true,
         unique: true,
     },
+    name: {
+        type: String,
+        required: true
+    },
     plants: [
         {
             type: Schema.Types.ObjectId,
