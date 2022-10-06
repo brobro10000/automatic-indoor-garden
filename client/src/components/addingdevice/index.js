@@ -13,11 +13,11 @@ export default function AddDevice() {
             >
                 <Modal.Header className='center-text'>Add Device ID</Modal.Header>
                 <Modal.Content>
-                    {/* <AddDeviceForm /> */}
+                    <AddDeviceForm />
                 </Modal.Content>
             </Modal>
             <Container>
-                {/* <DeviceCard /> */}
+                <DeviceCard />
             </Container>
             <div className='center-text add-device' onClick={() => dispatch({ type: 'open' })}>
                 <Icon name='add' size='huge' />

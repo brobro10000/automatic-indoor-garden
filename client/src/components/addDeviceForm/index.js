@@ -20,11 +20,13 @@ export default function AddDeviceForm() {
             const mutationResponse = await addDevice({
                 variables: {
                     uuid: submission.uuid,
-                    name: submission.nickname
+                    name: submission.name
                 }
             })
+            console.log(mutationResponse)
             if (mutationResponse) {
                 dispatch({ type: 'close' })
+                dispatch({ type: 'updateQuery', query: mutationResponse.data.addDevice })
             }
         }
     }
@@ -43,7 +45,7 @@ export default function AddDeviceForm() {
             <Form.Field
                 required
                 id='form-input-control-device-id'
-                name='nickname'
+                name='name'
                 control={Input}
                 type=''
                 onChange={updateSubmission}

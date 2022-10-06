@@ -13,7 +13,7 @@ const typeDefs = gql`
   type Device {
     _id: ID
     uuid: String
-    nickname: String
+    name: String
     plants: [Plant]
   }
   type Plant {
@@ -43,7 +43,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addDevice(uuid: String!, nickname: String!): Device
+    addDevice(uuid: String!, name: String!): Device
     updateHistory(_id: ID!, temperature: Int, pH: Float, humidity: Int): PlantHistory
     setHistory(_id: ID!, temperature:[Int], pH:[Float], humidity:[Int]): [PlantHistory]
     createPlant(name: String!, temperature: Int, pH: Float, humidity: Int): Plant

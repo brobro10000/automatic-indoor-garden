@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { Header, Form, Input, Button } from 'semantic-ui-react'
 import { validateEmail, validatePassword } from '../../utils/helpers'
 import { LOGIN } from "../../utils/mutations";
@@ -10,6 +11,7 @@ const LoginForm = (animatedClass) => {
     const [submission, setSubmission] = useState({
         email: null, password: null
     })
+    const navigate = useNavigate()
     const [login] = useMutation(LOGIN);
     const updateSubmission = (e) => {
 
@@ -33,11 +35,12 @@ const LoginForm = (animatedClass) => {
             }
         });
         const token = mutationResponse.data.login.token;
-        if (token) {
+        Auth.login(token)
+        if (token && Auth.loggedIn()) {
             let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
             document.getElementById('login-modal-container').setAttribute('class', classList)
             setTimeout(() => {
-                Auth.login(token)
+                navigate('/dashboard')
             }, 1500)
         }
     }

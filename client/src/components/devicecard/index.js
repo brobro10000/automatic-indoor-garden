@@ -3,15 +3,16 @@ import { Card, Grid } from 'semantic-ui-react'
 import { useQuery } from "@apollo/client";
 import { QUERY_DEVICES } from '../../utils/queries'
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
 
 export default function DeviceCard() {
-    const { loading, data } = useQuery(QUERY_DEVICES);
+    const { loading, data, refetch } = useQuery(QUERY_DEVICES);
+    const deviceQuery = useSelector((state) => state.query)
     const [devices, setDevices] = useState([])
     useEffect(() => {
-        if (!loading) {
-            setDevices(data.user.devices)
-        }
-    }, [loading, data])
+        refetch()
+        return setDevices(data?.user?.devices)
+    }, [refetch, deviceQuery, data])
 
     return (<>
         {
@@ -19,7 +20,7 @@ export default function DeviceCard() {
                 (<Grid>
                     <Grid.Row>
                         {
-                            devices.map((data, index) => (
+                            devices?.map((data, index) => (
                                 <Grid.Column
                                     width={4}
                                     key={index + 1}>

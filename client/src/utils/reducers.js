@@ -27,6 +27,8 @@ export const reducer = (state, action) => {
         ...state,
         open: true
       }
+    case 'updateQuery':
+      return { ...state, query: action.query }
     default:
       return state;
   }
