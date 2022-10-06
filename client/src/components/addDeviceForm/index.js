@@ -12,10 +12,12 @@ export default function AddDeviceForm() {
     const dispatch = useDispatch();
     const updateSubmission = (e) => {
         e.preventDefault()
+        console.log(submission)
         return setSubmission({ ...submission, [e.target.name]: e.target.value })
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log(submission)
         if (Auth.loggedIn()) {
             const mutationResponse = await addDevice({
                 variables: {
