@@ -23,15 +23,20 @@ const SignupForm = (animatedClass) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(submission.email)
         const mutationResponse = await addUser({
             variables: {
                 email: submission.email,
                 password: submission.password
             }
         });
-        const { token } = mutationResponse.data.createUser.token;
-        Auth.login(token)
+        const token = mutationResponse.data.createUser.token;
+        if (token) {
+            let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
+            document.getElementById('login-modal-container').setAttribute('class', classList)
+            setTimeout(() => {
+                Auth.login(token)
+            }, 1500)
+        }
 
     }
     return (

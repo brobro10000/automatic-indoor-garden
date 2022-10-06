@@ -19,7 +19,8 @@ export default function AddDeviceForm() {
         if (Auth.loggedIn()) {
             const mutationResponse = await addDevice({
                 variables: {
-                    uuid: submission.uuid
+                    uuid: submission.uuid,
+                    name: submission.nickname
                 }
             })
             if (mutationResponse) {
@@ -38,6 +39,15 @@ export default function AddDeviceForm() {
                 type=''
                 onChange={updateSubmission}
                 label='Device ID'
+            />
+            <Form.Field
+                required
+                id='form-input-control-device-id'
+                name='nickname'
+                control={Input}
+                type=''
+                onChange={updateSubmission}
+                label='Nickname'
             />
             <Form.Field
                 id='form-button-control'

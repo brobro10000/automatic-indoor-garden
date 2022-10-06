@@ -1,29 +1,13 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-// import 'semantic-ui-css/semantic.min.css';
-// const CSS = React.lazy(() => import('semantic-ui-css/semantic.min.css'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-// function test() {
-//   try {
-//     return CSS
-//   } catch (error) {
-//     let data = error.message
-//     console.log(data)
-//   }
-// }
 
 root.render(
   <>
-    {/* <Suspense fallback={<div>Loading..</div>}>
-      {
-        (<link rel="stylesheet" href={test()}></link>)
-      }
-    </Suspense> */}
     <App />
   </>
 );

@@ -29,10 +29,10 @@ const resolvers = {
 
   Mutation: {
     addDevice: async (parent, args, context) => {
-
+      //verify connection to PCB (WIFI)
+      //ping PCB to verify device name  (WIFI UUID)
       if (context.user) {
         const deviceData = await Device.create(args);
-        console.log(deviceData)
         await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { devices: deviceData } },
@@ -44,7 +44,6 @@ const resolvers = {
     },
     updateHistory: async (parent, { _id, temperature, pH, humidity }, context) => {
       const getHistory = await Plant.findById(_id)
-      console.log(getHistory.history[0])
       const plantData = await PlantHistory.findByIdAndUpdate(
         getHistory.history[0],
         {
