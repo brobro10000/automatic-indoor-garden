@@ -23,11 +23,11 @@ export const CREATE_USER = gql`
 `;
 
 export const ADD_DEVICE = gql`
-  mutation addDevice($uuid: String!, $name: String!) {
-  addDevice(uuid: $uuid, name: $name) {
+  mutation addDevice($uuid: String!, $nickname: String!) {
+  addDevice(uuid: $uuid, nickname: $nickname) {
     _id
     uuid
-    name
+    nickname
   }
 }
 `;

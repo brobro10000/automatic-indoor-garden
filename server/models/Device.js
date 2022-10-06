@@ -6,7 +6,7 @@ const deviceSchema = new Schema({
         required: true,
         unique: true,
     },
-    name: {
+    nickname: {
         type: String,
         required: true
     },
