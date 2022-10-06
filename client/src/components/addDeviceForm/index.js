@@ -23,7 +23,6 @@ export default function AddDeviceForm() {
                     name: submission.name
                 }
             })
-            console.log(mutationResponse)
             if (mutationResponse) {
                 dispatch({ type: 'close' })
                 dispatch({ type: 'updateQuery', query: mutationResponse.data.addDevice })
