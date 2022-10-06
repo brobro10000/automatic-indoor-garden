@@ -36,7 +36,7 @@ const SignupForm = (animatedClass) => {
             let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
             document.getElementById('login-modal-container').setAttribute('class', classList)
             setTimeout(() => {
-                navigate('/dashboard')
+                window.location.assign('/dashboard');
             }, 1500)
         }
 
