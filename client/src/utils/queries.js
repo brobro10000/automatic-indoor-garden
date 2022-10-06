@@ -10,7 +10,7 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_DEVICES = gql`
-  query devices {
+  {
   user {
     devices {
       uuid
