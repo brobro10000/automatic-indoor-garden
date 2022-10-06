@@ -24,7 +24,7 @@ export default function DeviceCard() {
                                     width={4}
                                     key={index + 1}>
                                     <Card
-                                        header={data.name}
+                                        header={data.nickname}
                                         meta={data.uuid}
                                         description={data.uuid}
                                     />
