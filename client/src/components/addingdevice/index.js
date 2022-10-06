@@ -17,7 +17,7 @@ export default function AddDevice() {
                 </Modal.Content>
             </Modal>
             <Container>
-                <DeviceCard />
+                {/* <DeviceCard /> */}
             </Container>
             <div className='center-text add-device' onClick={() => dispatch({ type: 'open' })}>
                 <Icon name='add' size='huge' />
