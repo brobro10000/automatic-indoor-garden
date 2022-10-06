@@ -36,13 +36,11 @@ const LoginForm = (animatedClass) => {
         });
         const token = mutationResponse.data.login.token;
         Auth.login(token)
-        if (token && Auth.loggedIn()) {
-            let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
-            document.getElementById('login-modal-container').setAttribute('class', classList)
-            setTimeout(() => {
-                window.location.assign('/dashboard');
-            }, 1500)
-        }
+        let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
+        document.getElementById('login-modal-container').setAttribute('class', classList)
+        setTimeout(() => {
+            window.location.assign('/dashboard');
+        }, 1500)
     }
     return (
         <Form name='loginContent' onSubmit={handleSubmit} className={animatedClass.props}>

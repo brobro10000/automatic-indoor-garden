@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
 import { Form, Header, Input, Button } from 'semantic-ui-react'
 import { validateEmail, validatePassword } from '../../utils/helpers'
 import { CREATE_USER } from "../../utils/mutations";
@@ -10,7 +9,6 @@ const SignupForm = (animatedClass) => {
     const [submission, setSubmission] = useState({
         email: null, password: null
     })
-    const navigate = useNavigate()
     const [addUser] = useMutation(CREATE_USER);
     const updateSubmission = (e) => {
         e.preventDefault()
@@ -32,13 +30,11 @@ const SignupForm = (animatedClass) => {
         });
         const token = mutationResponse.data.createUser.token;
         Auth.login(token)
-        if (token && Auth.loggedIn()) {
-            let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
-            document.getElementById('login-modal-container').setAttribute('class', classList)
-            setTimeout(() => {
-                window.location.assign('/dashboard');
-            }, 1500)
-        }
+        let classList = document.getElementById('login-modal-container').getAttribute('class').replace(/bounceIn/, 'bounceOut')
+        document.getElementById('login-modal-container').setAttribute('class', classList)
+        setTimeout(() => {
+            window.location.assign('/dashboard');
+        }, 1500)
 
     }
     return (
