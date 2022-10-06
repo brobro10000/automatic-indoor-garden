@@ -13,7 +13,7 @@ export default function AddDevice() {
             >
                 <Modal.Header className='center-text'>Add Device ID</Modal.Header>
                 <Modal.Content>
-                    <AddDeviceForm />
+                    {/* <AddDeviceForm /> */}
                 </Modal.Content>
             </Modal>
             <Container>
