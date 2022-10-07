@@ -25,9 +25,9 @@ export default function DeviceCard() {
                                     width={4}
                                     key={index + 1}>
                                     <Card
-                                        header={data.nickname}
+                                        header={data.name}
                                         meta={data.uuid}
-                                        description={data.uuid}
+                                        description='This is a device'
                                     />
                                 </Grid.Column>))
                         }
