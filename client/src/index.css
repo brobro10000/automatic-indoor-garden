@@ -82,15 +82,52 @@ div[data-pageheader="container"] {
 .add-device {
   width: fit-content;
   padding: 10px;
-  border: 2.5px solid rgba(34, 36, 38, .15);
+  border: 2.5px solid rgba(34, 36, 38, .33);
   border-radius: 10px;
 }
 
 .add-device:hover {
-  border: 2.5px solid rgba(34, 36, 38, .50);
+  border: 2.5px solid rgba(34, 36, 38, .75);
 }
 
 /* ADDDEVICE END */
+
+/* ADDPLANTER START */
+.planter-size {
+  height: 75px;
+  width: fit-content;
+}
+
+.plant-images {
+  height: 150px;
+  margin-top: .5rem !important;
+}
+
+.planter-bottom {
+  position: absolute !important;
+  transform: translate3d(1px, 72px, 9999px) !important;
+}
+
+.planter-left {
+  position: absolute !important;
+  transform: translate3d(-22px, 38px, 9999px) !important;
+}
+
+.planter-right {
+  position: absolute !important;
+  transform: translate3d(23px, 35px, 9999px) !important;
+}
+
+.planter-bottom {
+  position: absolute;
+  width: 50px
+}
+
+.add-button {
+  transform: translate3d(116px, 30px, 9999px) !important;
+}
+
+/* ADDPLANTER END */
 
 /* UTILITY CSS */
 .center-text {
@@ -108,6 +145,14 @@ div[data-pageheader="container"] {
 
 .mb-4 {
   margin-bottom: 2rem !important;
+}
+
+.remove-padding {
+  padding: 0px !important;
+}
+
+.absolute {
+  position: absolute !important;
 }
 
 /* END UTILITY CSS */
