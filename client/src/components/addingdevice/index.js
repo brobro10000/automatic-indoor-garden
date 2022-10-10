@@ -3,13 +3,13 @@ import AddDeviceForm from '../addDeviceForm'
 import { useSelector, useDispatch } from 'react-redux'
 import DeviceCard from '../devicecard'
 export default function AddDevice() {
-    const open = useSelector((state) => state.open)
+    const open = useSelector((state) => state.openDevice)
     const dispatch = useDispatch();
     return (
         <>
             <Modal
                 open={open}
-                onClose={() => dispatch({ type: 'close' })}
+                onClose={() => dispatch({ type: 'closeDevice' })}
             >
                 <Modal.Header className='center-text'>Add Device ID</Modal.Header>
                 <Modal.Content>
@@ -20,7 +20,7 @@ export default function AddDevice() {
                 <DeviceCard />
             </Container>
             <Divider section />
-            <div className='center-text add-device' onClick={() => dispatch({ type: 'open' })}>
+            <div className='center-text add-device' onClick={() => dispatch({ type: 'openDevice' })}>
                 <Icon name='add' size='huge' />
                 <Header>Click to add a device</Header>
             </div>

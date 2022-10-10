@@ -19,8 +19,9 @@ code {
 }
 
 #root {
-  display: block;
+  /* display: auto; */
   height: 100%;
+  width: 100%;
   /* background: rgb(34, 173, 195);
   background: -moz-linear-gradient(0deg, rgba(34, 173, 195, 1) 0%, rgba(214, 253, 45, 1) 100%);
   background: -webkit-linear-gradient(0deg, rgba(34, 173, 195, 1) 0%, rgba(214, 253, 45, 1) 100%);
@@ -102,5 +103,12 @@ div[data-pageheader="container"] {
   justify-content: center;
 }
 
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.mb-4 {
+  margin-bottom: 2rem !important;
+}
 
 /* END UTILITY CSS */

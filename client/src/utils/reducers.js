@@ -17,16 +17,26 @@ export const reducer = (state, action) => {
         ...state,
         user: action.user,
       };
-    case 'close':
+    case 'closeDevice':
       return {
         ...state,
-        open: false
-      }
-    case 'open':
+        openDevice: false
+      };
+    case 'openDevice':
       return {
         ...state,
-        open: true
-      }
+        openDevice: true
+      };
+    case 'closePlant':
+      return {
+        ...state,
+        openPlant: false
+      };
+    case 'openPlant':
+      return {
+        ...state,
+        openPlant: true
+      };
     case 'updateQuery':
       return { ...state, query: action.query }
     default:

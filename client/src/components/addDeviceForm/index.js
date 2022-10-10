@@ -24,7 +24,7 @@ export default function AddDeviceForm() {
                 }
             })
             if (mutationResponse) {
-                dispatch({ type: 'close' })
+                dispatch({ type: 'closeDevice' })
                 dispatch({ type: 'updateQuery', query: mutationResponse.data.addDevice })
             }
         }
