@@ -2,6 +2,11 @@
 * {
   padding: 0;
   margin: 0 auto;
+  height: auto;
+}
+
+html {
+  height: 100%;
 }
 
 body {
@@ -18,20 +23,14 @@ code {
     monospace;
 }
 
-#root {
-  /* display: auto; */
-  height: 100%;
-  width: 100%;
-  /* background: rgb(34, 173, 195);
-  background: -moz-linear-gradient(0deg, rgba(34, 173, 195, 1) 0%, rgba(214, 253, 45, 1) 100%);
-  background: -webkit-linear-gradient(0deg, rgba(34, 173, 195, 1) 0%, rgba(214, 253, 45, 1) 100%);
-  background: linear-gradient(0deg, rgba(34, 173, 195, 1) 0%, rgba(214, 253, 45, 1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#22adc3", endColorstr="#d6fd2d", GradientType=1); */
+.gradient-background {
   background: rgb(85, 172, 186);
   background: -moz-linear-gradient(0deg, rgba(85, 172, 186, 1) 0%, rgba(223, 245, 129, 1) 100%);
   background: -webkit-linear-gradient(0deg, rgba(85, 172, 186, 1) 0%, rgba(223, 245, 129, 1) 100%);
   background: linear-gradient(0deg, rgba(85, 172, 186, 1) 0%, rgba(223, 245, 129, 1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#55acba", endColorstr="#dff581", GradientType=1);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* END GLOBAL CSS */
