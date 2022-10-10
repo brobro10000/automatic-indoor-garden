@@ -1,5 +1,5 @@
 
-import { Card, Grid } from 'semantic-ui-react'
+import { Card, Grid, Message } from 'semantic-ui-react'
 import { useQuery } from "@apollo/client";
 import { QUERY_DEVICES } from '../../utils/queries'
 import { useState, useEffect } from 'react'
@@ -14,11 +14,11 @@ export default function DeviceCard() {
         return setDevices(data?.user?.devices)
     }, [refetch, deviceQuery, data])
 
-    return (<>
-        {
-            loading ? <>Loading</> :
-                (<Grid>
-                    <Grid.Row>
+    return (<Grid className='justify-center'>
+        <Grid.Row>
+            {
+                loading ? <>Loading</> :
+                    devices?.length ? (<>
                         {
                             devices?.map((data, index) => (
                                 <Grid.Column
@@ -31,9 +31,17 @@ export default function DeviceCard() {
                                     />
                                 </Grid.Column>))
                         }
-                    </Grid.Row>
-                </Grid>)
-        }
-    </>
-    )
+                    </>
+                    ) : (
+                        <Message size='big' className='center-text' compact>
+                            <Message.Header>
+                                No Devices
+                            </Message.Header>
+                            <Message.Content>
+                                Click below to add a device
+                            </Message.Content>
+                        </Message>)
+            }
+        </Grid.Row>
+    </Grid>)
 }
