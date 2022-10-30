@@ -12,3 +12,11 @@ export function validatePassword(password) {
   var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   return re.test(String(password));
 }
+
+export function arrayOfNumbers(length, zeroIndex = true) {
+  if (zeroIndex) {
+    return Array.from(Array(length).keys());
+  } else {
+    return Array.from(Array(length).keys()).map(x => x + 1);
+  }
+}

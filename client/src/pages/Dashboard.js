@@ -15,7 +15,9 @@ const Dashboard = () => {
     });
     return (
         <>
-            <PageHeader data-pageheader='container'></PageHeader>
+            <PageHeader data-pageheader='container'>
+                Dashboard
+            </PageHeader>
             <Container>
                 <AddDevice />
                 <Divider section></Divider>

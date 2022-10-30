@@ -39,6 +39,8 @@ export const reducer = (state, action) => {
       };
     case 'updateQuery':
       return { ...state, query: action.query }
+    case 'saveUUID':
+      return { ...state, uuid: action.uuid }
     default:
       return state;
   }

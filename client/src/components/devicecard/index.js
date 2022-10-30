@@ -4,22 +4,30 @@ import { useQuery } from "@apollo/client";
 import { QUERY_DEVICES } from '../../utils/queries'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
+import AddPlantForm from '../addPlants';
 export default function DeviceCard() {
     const { loading, data, refetch } = useQuery(QUERY_DEVICES);
     const [classNames, updateClassName] = useState('')
     const deviceQuery = useSelector((state) => state.query)
     const [devices, setDevices] = useState([])
     const dispatch = useDispatch();
+    const state = useSelector((state) => state)
     useEffect(() => {
         refetch()
         return setDevices(data?.user?.devices)
-    }, [refetch, deviceQuery, data, loading])
+    }, [state, refetch, deviceQuery, data, loading, dispatch])
     function animate(e) {
         document.getElementById(e).classList.add('animate__animated', 'animate__pulse')
     }
     function disableAnimate(e) {
         document.getElementById(e).classList.remove('animate__animated', 'animate__pulse')
+    }
+    async function test(data) {
+        dispatch({ type: 'saveUUID', uuid: data.uuid })
+        if (state.uuid) {
+            window.location.assign(`/dashboard/planter/create`)
+        }
+
     }
     return (<Grid stackable className='justify-center'>
         <Grid.Row>
@@ -40,7 +48,7 @@ export default function DeviceCard() {
                                         meta={data.uuid}
                                         description='This is a device'
                                         extra={(
-                                            <div onMouseEnter={() => animate(index)} onMouseLeave={() => disableAnimate(index)} className='center-text add-device' onClick={() => dispatch({ type: 'openPlant' })}>
+                                            <div onMouseEnter={() => animate(index)} onMouseLeave={() => disableAnimate(index)} className='center-text add-device' onClick={() => test(data)}>
                                                 <Icon id={index} className={classNames} name='add' size='huge' />
                                                 <Header>Click to add a Plant</Header>
                                             </div>)}
