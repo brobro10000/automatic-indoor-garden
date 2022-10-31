@@ -2,14 +2,21 @@ import { Card } from "semantic-ui-react"
 import { useQuery } from "@apollo/client";
 import { QUERY_PLANTS } from "../../utils/queries";
 import { useLocation } from "react-router-dom";
-
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 export default function Plants() {
     const location = useLocation()
-    const { loading, data } = useQuery(QUERY_PLANTS, {
+    const { loading, data, refetch } = useQuery(QUERY_PLANTS, {
         variables: { uuid: new URLSearchParams(location.search).get("uuid") }
     });
-    const plants = data?.plantsByUUID.plants || [];
-    console.log(plants)
+    const [, setPlantData] = useState([])
+    const dispatch = useDispatch();
+    const deviceQuery = useSelector((state) => state.query)
+    useEffect(() => {
+        refetch()
+        return setPlantData(data?.plantsByUUID?.plants)
+    }, [data, refetch, loading, deviceQuery, dispatch])
+    const plants = data?.plantsByUUID?.plants || [];
     if (plants.length === 0) {
         return <h3 className='center-text'>No Plants Yet</h3>;
     }
@@ -26,9 +33,9 @@ export default function Plants() {
                                 <Card.Meta>Plant #{plant.position + 1}</Card.Meta>
                                 <hr />
                                 <Card.Description>
-                                    <p>Temperature: {plant.temperature}</p>
+                                    <p>Temperature: {plant.temperature}°F</p>
                                     <p>pH: {plant.pH}</p>
-                                    <p>Humidity: {plant.humidity}</p>
+                                    <p>Humidity: {plant.humidity}%</p>
                                 </Card.Description>
                             </Card.Content>
                         </Card>

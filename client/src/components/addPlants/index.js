@@ -1,16 +1,19 @@
 import React, { useState } from "react"
 import { arrayOfNumbers } from "../../utils/helpers"
-import { Header, Form, Input, Button, Accordion, Icon, Container, Grid } from 'semantic-ui-react'
+import { Header, Form, Input, Button, Accordion, Icon, Grid } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client';
 import { ADD_PLANT } from '../../utils/mutations';
 import Auth from "../../utils/auth";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+
 const AddPlantForm = () => {
     const [submission, setSubmission] = useState({})
     const [indexValue, setIndexValue] = useState(-1)
     const totalPlants = arrayOfNumbers(4)
     const [createPlant] = useMutation(ADD_PLANT);
     const location = useLocation();
+    const dispatch = useDispatch()
     const setActive = (element) => {
         if (element === indexValue) {
             return setIndexValue(-1)
@@ -36,11 +39,11 @@ const AddPlantForm = () => {
                 variables: plantData
             })
             if (mutationResponse) {
+                dispatch({ type: 'updateQuery', query: mutationResponse.data.addDevice })
                 return alert('Plant Added')
             }
         }
         return alert('Your session has expired. Please log in to create a plant')
-
     }
     return (
         <Accordion>
