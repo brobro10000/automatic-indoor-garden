@@ -14,8 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import 'semantic-ui-css/semantic.min.css';
 import 'animate.css';
 import CreatePlants from './pages/CreatePlants';
-import { useSelector, useDispatch } from 'react-redux'
-// import Loading from "./components/Loading";
+
 const httpLink = createHttpLink({
   uri: "graphql",
 });
@@ -36,7 +35,6 @@ const client = new ApolloClient({
 });
 
 function App() {
-  // const state = useSelector((state) => state)
 
   return (
     <>
@@ -45,7 +43,7 @@ function App() {
           <Router>
             <Provider store={store}>
               <Routes>
-                <Route path={`/dashboard/planter/create`} element={<CreatePlants />} />
+                <Route path="/create" element={<CreatePlants />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/" element={<Home />} />
                 {/* <Route index element={<Home />} /> */}

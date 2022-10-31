@@ -69,7 +69,7 @@ div[data-about="modal-header-text"] {
 div[data-pageheader="header-text"] {
   display: flex;
   align-self: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 div[data-pageheader="container"] {

@@ -4,10 +4,11 @@ import { useQuery } from "@apollo/client";
 import { QUERY_DEVICES } from '../../utils/queries'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import AddPlantForm from '../addPlants';
+import { useNavigate } from "react-router-dom";
 export default function DeviceCard() {
     const { loading, data, refetch } = useQuery(QUERY_DEVICES);
-    const [classNames, updateClassName] = useState('')
+    const [classNames] = useState('')
+    const navigation = useNavigate()
     const deviceQuery = useSelector((state) => state.query)
     const [devices, setDevices] = useState([])
     const dispatch = useDispatch();
@@ -22,10 +23,10 @@ export default function DeviceCard() {
     function disableAnimate(e) {
         document.getElementById(e).classList.remove('animate__animated', 'animate__pulse')
     }
-    async function test(data) {
+    async function redirect(data) {
         dispatch({ type: 'saveUUID', uuid: data.uuid })
         if (state.uuid) {
-            window.location.assign(`/dashboard/planter/create`)
+            navigation('/create?uuid=' + data.uuid)
         }
 
     }
@@ -48,9 +49,9 @@ export default function DeviceCard() {
                                         meta={data.uuid}
                                         description='This is a device'
                                         extra={(
-                                            <div onMouseEnter={() => animate(index)} onMouseLeave={() => disableAnimate(index)} className='center-text add-device' onClick={() => test(data)}>
+                                            <div onMouseEnter={() => animate(index)} onMouseLeave={() => disableAnimate(index)} className='center-text add-device' onClick={() => redirect(data)}>
                                                 <Icon id={index} className={classNames} name='add' size='huge' />
-                                                <Header>Click to add a Plant</Header>
+                                                <Header>Click to Manage Plants</Header>
                                             </div>)}
                                     />
                                 </Grid.Column>))

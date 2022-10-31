@@ -27,12 +27,12 @@ async function start() {
 }
 start();
 
-if (process.env.NODE_ENV === "production") {
-    app.use(expressStaticGzip(path.join(__dirname, "../client/build/")));
-}
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
+// if (process.env.NODE_ENV === "production") {
+//     app.use(expressStaticGzip(path.join(__dirname, "../client/build/")));
+// }
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 db.once("open", () => {
     // integrate our Apollo server with the Express application as middleware

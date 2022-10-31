@@ -10,6 +10,12 @@ const resolvers = {
         .select("-__v");
       return plantData;
     },
+    plantsByUUID: async (parent, args, context) => {
+      const plantData = await Device.findOne({ uuid: args.uuid })
+        .populate("plants")
+        .select("-__v");
+      return plantData;
+    },
     plantById: async (parent, { _id }, context) => {
       const plantData = await Plant.findById(_id)
         .populate("history")
@@ -19,7 +25,16 @@ const resolvers = {
     user: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findById(context.user._id)
-          .populate("devices")
+          .populate({
+            path: "devices",
+            populate: {
+              path: "plants",
+              populate: {
+                path: "history"
+              }
+            }
+          }
+          )
           .select("-__v -password")
         return userData;
       }
@@ -72,15 +87,27 @@ const resolvers = {
       return updatePlant.history;
     },
 
-    createPlant: async (parent, { name, temperature, pH, humidity }) => {
-      const plant = await Plant.create({
-        name: name,
-        temperature: temperature,
-        pH: pH,
-        humidity: humidity
-      });
-      return plant;
+    createPlant: async (parent, args, context) => {
+      if (context.user) {
+        const plant = await Plant.create({
+          name: args.name,
+          position: args.position,
+          temperature: args.temperature,
+          pH: args.pH,
+          humidity: args.humidity,
+        });
+        console.log(plant)
+        await Device.findOneAndUpdate(
+          { uuid: args.uuid },
+          { $push: { plants: plant } },
+          { new: true })
+          .populate("plants")
+
+        return plant;
+      }
+      throw new AuthenticationError("Not logged in");
     },
+
     createUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);

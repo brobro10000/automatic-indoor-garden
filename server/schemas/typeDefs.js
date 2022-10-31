@@ -19,6 +19,7 @@ const typeDefs = gql`
   type Plant {
     _id: ID
     name: String
+    position: Int
     temperature: Int
     pH: Float
     humidity: Int
@@ -37,6 +38,7 @@ const typeDefs = gql`
   type Query {
     devices: [Device]
     plants: [Plant]
+    plantsByUUID(uuid: String!): Device
     plantById(_id: ID!): Plant
     historyById(_id: ID!): PlantHistory
     user: User
@@ -46,7 +48,7 @@ const typeDefs = gql`
     addDevice(uuid: String!, name: String!): Device
     updateHistory(_id: ID!, temperature: Int, pH: Float, humidity: Int): PlantHistory
     setHistory(_id: ID!, temperature:[Int], pH:[Float], humidity:[Int]): [PlantHistory]
-    createPlant(name: String!, temperature: Int, pH: Float, humidity: Int): Plant
+    createPlant(name: String!, position: Int!, uuid: String!, temperature: Int, pH: Float, humidity: Int): Plant
     createUser(email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
   }

@@ -1,31 +1,46 @@
 import React, { useState } from "react"
 import { arrayOfNumbers } from "../../utils/helpers"
 import { Header, Form, Input, Button, Accordion, Icon, Container, Grid } from 'semantic-ui-react'
+import { useMutation } from '@apollo/client';
+import { ADD_PLANT } from '../../utils/mutations';
+import Auth from "../../utils/auth";
+import { useLocation } from "react-router-dom";
 const AddPlantForm = () => {
-    const [index, setIndex] = useState(false)
     const [submission, setSubmission] = useState({})
     const [indexValue, setIndexValue] = useState(-1)
     const totalPlants = arrayOfNumbers(4)
+    const [createPlant] = useMutation(ADD_PLANT);
+    const location = useLocation();
     const setActive = (element) => {
         if (element === indexValue) {
             return setIndexValue(-1)
         }
         setIndexValue(element)
     }
-
     const updateSubmission = (e) => {
         e.preventDefault()
-        console.log(submission)
         return setSubmission({ ...submission, [e.target.name]: e.target.value })
     }
-    const handleSubmit = (element) => {
+    const handleSubmit = async (element) => {
+        const pH = parseFloat(parseFloat(submission[`pH-${element}`]).toFixed(2))
         const plantData = {
             name: submission[`name-${element}`],
-            temperature: submission[`temperature-${element}`] || -1,
-            humidity: submission[`humidity-${element}`] || -1,
-            pH: submission[`pH-${element}`] || -1,
+            position: element,
+            uuid: new URLSearchParams(location.search).get('uuid'),
+            temperature: parseInt(submission[`temperature-${element}`]) || -1,
+            pH: pH || -1,
+            humidity: parseInt(submission[`humidity-${element}`]) || -1,
         }
-        console.log(plantData)
+        if (Auth.loggedIn()) {
+            const mutationResponse = await createPlant({
+                variables: plantData
+            })
+            if (mutationResponse) {
+                return alert('Plant Added')
+            }
+        }
+        return alert('Your session has expired. Please log in to create a plant')
+
     }
     return (
         <Accordion>

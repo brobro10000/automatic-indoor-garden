@@ -6,6 +6,10 @@ const plantSchema = new Schema({
         required: true,
         trim: true,
     },
+    position: {
+        type: Number,
+        required: true,
+    },
     temperature: {
         type: Number,
     },

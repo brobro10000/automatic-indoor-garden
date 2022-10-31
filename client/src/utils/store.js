@@ -2,7 +2,8 @@ import { createStore } from "redux";
 import { reducer } from './reducers'
 
 const initialState = {
-  openDevice: false
+  openDevice: false,
+  query: {}
 }
 
 export default createStore(

@@ -19,3 +19,20 @@ export const QUERY_DEVICES = gql`
   }
 }
 `
+
+export const QUERY_PLANTS = gql`
+query PlantsByUUID($uuid: String!) {
+  plantsByUUID(uuid: $uuid) {
+    _id
+    uuid
+    name
+    plants {
+      _id
+      name
+      position
+      temperature
+      pH
+      humidity
+    }
+  }
+}`

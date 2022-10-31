@@ -32,3 +32,14 @@ export const ADD_DEVICE = gql`
 }
 `;
 
+export const ADD_PLANT = gql`
+mutation Mutation($name: String!, $position: Int!, $uuid: String!, $temperature: Int, $pH: Float, $humidity: Int) {
+  createPlant(name: $name, position: $position, uuid: $uuid, temperature: $temperature, pH: $pH, humidity: $humidity) {
+    name
+    position
+    temperature
+    pH
+    humidity
+  }
+}
+`;
