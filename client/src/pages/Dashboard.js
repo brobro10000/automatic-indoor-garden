@@ -12,6 +12,13 @@ const Dashboard = () => {
         if (!loggedIn) {
             navigate('/')
         }
+        fetch('https://retoolapi.dev/nLNNyy/AIG').then(res => res.json()).then(data => {
+            data.forEach((element, index) => {
+                if (element.deviceID === "UCF-SD-2022") {
+                    return data[index]
+                }
+            })
+        })
     });
     return (
         <>
