@@ -147,6 +147,14 @@ div[data-pageheader="container"] {
   margin-bottom: 2rem !important;
 }
 
+.m-4 {
+  margin: 2rem !important;
+}
+
+.dflex {
+  display: flex;
+}
+
 .remove-padding {
   padding: 0px !important;
 }
