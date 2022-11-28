@@ -1,5 +1,5 @@
 
-import { Card, Grid, Message, Loader, Header, Icon } from 'semantic-ui-react'
+import { Card, Grid, Message, Loader, Header, Icon, Button } from 'semantic-ui-react'
 import { useQuery } from "@apollo/client";
 import { QUERY_DEVICES } from '../../utils/queries'
 import { useState, useEffect } from 'react'
@@ -49,10 +49,15 @@ export default function DeviceCard() {
                                         meta={data.uuid}
                                         description='This is a device'
                                         extra={(
-                                            <div onMouseEnter={() => animate(index)} onMouseLeave={() => disableAnimate(index)} className='center-text add-device' onClick={() => redirect(data)}>
-                                                <Icon id={index} className={classNames} name='add' size='huge' />
-                                                <Header>Click to Manage Plants</Header>
-                                            </div>)}
+                                            <>
+                                                <div onMouseEnter={() => animate(index)} onMouseLeave={() => disableAnimate(index)} className='center-text add-device' onClick={() => redirect(data)}>
+                                                    <Icon id={index} className={classNames} name='add' size='huge' />
+                                                    <Header>Click to Manage Plants</Header>
+                                                </div>
+                                                <div>
+                                                    <Button onClick={() => navigation('/manage?uuid=' + data.uuid)}>Manage Plants</Button>
+                                                </div>
+                                            </>)}
                                     />
                                 </Grid.Column>))
                         }
