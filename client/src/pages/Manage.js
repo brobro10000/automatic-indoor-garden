@@ -26,7 +26,7 @@ const Manage = () => {
     console.log(data1)
     return (
         <>
-            {data1.length > 0 && <Container>
+            {data1 && <Container>
                 <h2>{data1.deviceID}</h2>
                 <h3>Temperature:<span> {data1.temperature} </span></h3>
                 <h3>Humidity:<span> {data1.humidity} </span></h3>
