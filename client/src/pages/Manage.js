@@ -8,7 +8,7 @@ const Manage = () => {
     const [data1, setData1] = useState([])
     const navigate = useNavigate()
     if (data1.length === 0) {
-        const x = fetch('https://retoolapi.dev/nLNNyy/AIG').then(res => res.json()).then(data => {
+        const x = fetch('https://retoolapi.dev/hWtHBK/AIG').then(res => res.json()).then(data => {
             console.log(data)
             data.forEach((element, index) => {
                 if (element.deviceID === "UCF-SD-2022") {
