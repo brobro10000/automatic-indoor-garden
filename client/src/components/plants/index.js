@@ -17,6 +17,11 @@ export default function Plants() {
         return setPlantData(data?.plantsByUUID?.plants)
     }, [data, refetch, loading, deviceQuery, dispatch])
     const plants = data?.plantsByUUID?.plants || [];
+    useEffect(() => {
+        fetch('https://retoolapi.dev/nLNNyy/AIG').then(res => res.json()).then(data => {
+            console.log(data)
+        })
+    }, [])
     if (plants.length === 0) {
         return <h3 className='center-text'>No Plants Yet</h3>;
     }
