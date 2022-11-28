@@ -14,7 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import 'semantic-ui-css/semantic.min.css';
 import 'animate.css';
 import CreatePlants from './pages/CreatePlants';
-
+import Manage from "./pages/Manage";
 const httpLink = createHttpLink({
   uri: "graphql",
 });
@@ -43,6 +43,7 @@ function App() {
           <Router>
             <Provider store={store}>
               <Routes>
+                <Route path="/manage" element={<Manage />} />
                 <Route path="/create" element={<CreatePlants />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/" element={<Home />} />
